@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.jokujossai.pcem</id>
+  <name>PCem</name>
+  <summary>PC Emulator for classic IBM PC compatibles</summary>
+  <developer id="io.github.jokujossai">
+    <name>Daniel Linjama</name>
+  </developer>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <url type="homepage">https://github.com/jokujossai/pcem-flatpak</url>
+  <url type="bugtracker">https://github.com/jokujossai/pcem-flatpak/issues</url>
+  <description>
+    <p>
+      PCem is an emulator for old IBM PC compatibles and clones. It emulates a wide range of hardware
+      from the original IBM PC through the Pentium era, including various graphics cards, sound cards,
+      and other peripherals.
+    </p>
+    <p>Features include:</p>
+    <ul>
+      <li>Accurate cycle-by-cycle CPU emulation from 8088 to Pentium</li>
+      <li>Wide range of graphics cards from CGA to 3D accelerators</li>
+      <li>Sound Blaster, Gravis Ultrasound, and other sound cards</li>
+      <li>Network support for multiplayer DOS games</li>
+    </ul>
+    <p>
+      Note: This Flatpak packaging is MIT licensed. PCem itself is licensed under GPL-2.0.
+      wxWidgets is licensed under the wxWindows Library Licence.
+    </p>
+  </description>
+  <launchable type="desktop-id">io.github.jokujossai.pcem.desktop</launchable>
+  <categories>
+    <category>Game</category>
+    <category>Emulator</category>
+  </categories>
+  <keywords>
+    <keyword>emulator</keyword>
+    <keyword>pc</keyword>
+    <keyword>ibm</keyword>
+    <keyword>dos</keyword>
+    <keyword>windows</keyword>
+    <keyword>retro</keyword>
+  </keywords>
+  <content_rating type="oars-1.1" />
+  <releases>
+    <release version="1.0.0" date="2025-01-01">
+      <description>
+        <p>Initial Flatpak release</p>
+      </description>
+    </release>
+  </releases>
+</component>

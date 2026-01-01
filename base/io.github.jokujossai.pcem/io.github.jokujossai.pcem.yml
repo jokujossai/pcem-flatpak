@@ -1,0 +1,81 @@
+app-id: io.github.jokujossai.pcem
+runtime: org.freedesktop.Platform
+runtime-version: '25.08'
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.llvm20
+command: pcem
+
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --socket=pulseaudio
+  - --device=all
+  - --filesystem=home
+
+cleanup:
+  - /include
+  - /lib/pkgconfig
+  - /share/aclocal
+  - /share/man
+  - '*.la'
+  - '*.a'
+
+modules:
+  - name: wxwidgets
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+      - -DwxBUILD_TOOLKIT=gtk3
+      - -DwxUSE_OPENGL=ON
+      - -DwxUSE_REGEX=builtin
+      - -DwxUSE_WEBVIEW=OFF
+      - -DwxUSE_MEDIACTRL=OFF
+      - -DwxUSE_LIBNOTIFY=OFF
+      - -DwxUSE_SECRETSTORE=OFF
+    sources:
+      - type: archive
+        url: https://github.com/wxWidgets/wxWidgets/releases/download/v3.2.6/wxWidgets-3.2.6.tar.bz2
+        sha256: 939e5b77ddc5b6092d1d7d29491fe67010a2433cf9b9c0d841ee4d04acb9dce7
+
+  - name: pcem
+    buildsystem: cmake-ninja
+    build-options:
+      append-path: /usr/lib/sdk/llvm20/bin
+      prepend-ld-library-path: /usr/lib/sdk/llvm20/lib
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_C_COMPILER=/usr/lib/sdk/llvm20/bin/clang
+      - -DCMAKE_CXX_COMPILER=/usr/lib/sdk/llvm20/bin/clang++
+      - -DUSE_NETWORKING=OFF
+      - -DUSE_ALSA=OFF
+      - -DPLUGIN_ENGINE=OFF
+    sources:
+      - type: git
+        url: https://github.com/sarah-walker-pcem/pcem.git
+        branch: dev
+      - type: file
+        path: io.github.jokujossai.pcem.desktop
+      - type: file
+        path: io.github.jokujossai.pcem.metainfo.xml
+      - type: file
+        path: io.github.jokujossai.pcem.svg
+    post-install:
+      - install -Dm644 io.github.jokujossai.pcem.desktop /app/share/applications/io.github.jokujossai.pcem.desktop
+      - install -Dm644 io.github.jokujossai.pcem.metainfo.xml /app/share/metainfo/io.github.jokujossai.pcem.metainfo.xml
+      - install -Dm644 io.github.jokujossai.pcem.svg /app/share/icons/hicolor/scalable/apps/io.github.jokujossai.pcem.svg
+
+  - name: pcem-roms
+    buildsystem: simple
+    sources:
+      - type: archive
+        url: https://mirror.linjama.com/archive.org/download/pcem_v17-roms/pcem_v17-roms.zip
+        mirror-urls:
+          - https://archive.org/download/pcem_v17-roms/pcem_v17-roms.zip
+        sha256: 20c3a22b91bdef499bb2974401e9decbb0adbd31191e77915a5fdcce4a04b4ef
+        dest: roms
+    build-commands:
+      - install -dm755 /app/share/pcem
+      - cp -r roms /app/share/pcem/

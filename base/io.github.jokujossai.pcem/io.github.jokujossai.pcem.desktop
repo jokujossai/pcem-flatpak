@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=PCem
+GenericName=PC Emulator
+Comment=Emulator for classic IBM PC compatibles and clones
+Icon=io.github.jokujossai.pcem
+Exec=pcem
+Terminal=false
+Categories=Game;Emulator;
+Keywords=emulator;pc;ibm;dos;windows;retro;
