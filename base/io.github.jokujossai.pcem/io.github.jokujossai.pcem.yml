@@ -70,12 +70,9 @@ modules:
   - name: pcem-roms
     buildsystem: simple
     sources:
-      - type: archive
-        url: https://mirror.linjama.com/archive.org/download/pcem_v17-roms/pcem_v17-roms.zip
-        mirror-urls:
-          - https://archive.org/download/pcem_v17-roms/pcem_v17-roms.zip
-        sha256: 20c3a22b91bdef499bb2974401e9decbb0adbd31191e77915a5fdcce4a04b4ef
-        dest: roms
+      - type: file
+        url: https://github.com/BaRRaKudaRain/PCem-ROMs/releases/download/v17.0/PCem_ROMs.7z
+        sha256: 3c026aafda6e4cb5a56a070e25b1238adbad1048eabba16518ad77129d044dd6
     build-commands:
-      - install -dm755 /app/share/pcem
-      - cp -r roms /app/share/pcem/
+      - install -dm755 /app/share/pcem/roms
+      - bsdtar -xf PCem_ROMs.7z -C /app/share/pcem/roms
