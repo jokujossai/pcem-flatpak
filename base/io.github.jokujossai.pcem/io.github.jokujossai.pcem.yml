@@ -12,7 +12,7 @@ finish-args:
   - --socket=wayland
   - --socket=pulseaudio
   - --device=all
-  - --filesystem=home
+  - --filesystem=~/.pcem
 
 cleanup:
   - /include
